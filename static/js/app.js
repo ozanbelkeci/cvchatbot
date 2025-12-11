@@ -1,20 +1,27 @@
-window.addEventListener("load", function() {
-    sendMessage("Merhaba!");
-});
+function addMessage(text, sender) {
+    const chatBox = document.getElementById("chat-box");
 
+    const message = document.createElement("div");
+    message.className = sender === "user" ? "message user-message" : "message bot-message";
+    message.innerText = text;
 
-document.getElementById("sendBtn").onclick = sendMessage;
-document.getElementById("message").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") sendMessage();
-});
+    chatBox.appendChild(message);
 
-async function sendMessage() {
+    // Otomatik aşağı kaydır
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// SEND MESSAGE - hem input'tan hem dışarıdan text alabilir
+async function sendMessage(forcedText = null) {
+
     const input = document.getElementById("message");
-    const msg = input.value.trim();
+    const msg = forcedText ? forcedText.trim() : input.value.trim();
+
     if (!msg) return;
 
+    if (!forcedText) input.value = ""; // sadece kullanıcı yazdıysa temizle
+
     addMessage(msg, "user");
-    input.value = "";
 
     const response = await fetch("/api/chat", {
         method: "POST",
@@ -26,12 +33,7 @@ async function sendMessage() {
     addMessage(data.reply, "bot");
 }
 
-function addMessage(text, type) {
-    const box = document.getElementById("chatbox");
-    const div = document.createElement("div");
-    div.className = "message " + type;
-    div.innerText = text;
-    box.appendChild(div);
-
-    box.scrollTop = box.scrollHeight;
-}
+// Sayfa açılır açılmaz otomatik mesaj gönder
+window.addEventListener("load", () => {
+    sendMessage("Merhaba! Sana nasıl yardımcı olabilirim? İstediklerini sorabilirsin!");
+});
