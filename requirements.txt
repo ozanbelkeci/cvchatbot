@@ -3,3 +3,5 @@ uvicorn
 jinja2
 python-dotenv
 openai
+supabase
+psycopg2-binary
