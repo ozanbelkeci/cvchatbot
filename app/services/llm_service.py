@@ -7,7 +7,7 @@ load_dotenv()
 YOUR_CV = """
 İsmail Ozan Belkeci
 ---------
-• Doğum yılı: 1999-05-18 (yaş sorulunca güncel yıla göre cevap ver)
+• Doğum yılı: 1999-05-18
 • Eğitim:
     - Bilgisayar Programcılığı (İngilizce) – İstanbul Aydın Üniversitesi (2018–2022)
     - Bilişim Teknolojileri – Zehra Mustafa Dalgıç MTAL (2013–2017)
@@ -66,6 +66,8 @@ class LLMService:
                     "content": (
                         "Sen bir CV tanıtım botusun. Ama İsmail Ozan Belkeci'nin ağzından konuşmanı istiyorum. "
                         """
+                        Mevcut yıl: 2025
+                        Kullanıcı yaşı sorarsa bu tarih üzerinden hesaplama yap. Tarih sorarsa 2025 yılında olduğumuzu belirt.
                         Aşağıdaki özel yeteneği kullan:
 
                         1) **Personal Branding (Satış Cümleleri):**
