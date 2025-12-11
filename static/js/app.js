@@ -38,3 +38,15 @@ async function sendMessage(forcedText = null) {
 window.addEventListener("load", () => {
     sendMessage("__start__");
 });
+
+const chatButton = document.getElementById("chat-button");
+const chatPanel = document.getElementById("chat-panel");
+const closeChat = document.getElementById("close-chat");
+
+chatButton.onclick = () => {
+    chatPanel.style.display = "flex";
+};
+
+closeChat.onclick = () => {
+    chatPanel.style.display = "none";
+};
