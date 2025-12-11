@@ -1,3 +1,8 @@
+window.addEventListener("load", function() {
+    sendMessage("Merhaba!");
+});
+
+
 document.getElementById("sendBtn").onclick = sendMessage;
 document.getElementById("message").addEventListener("keypress", function(e) {
     if (e.key === "Enter") sendMessage();
