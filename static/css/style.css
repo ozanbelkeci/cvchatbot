@@ -1,142 +1,155 @@
-/* Genel ayarlar */
+/* Genel Ayarlar */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    scroll-behavior: smooth;
-    background-color: #121212;
+    background-color: #1a1a1a;
+    font-family: 'Segoe UI', sans-serif;
     color: #e0e0e0;
+    scroll-behavior: smooth;
 }
 
 /* Navbar */
-.navbar-dark .navbar-nav .nav-link {
-    color: #e0e0e0;
+.navbar {
+    padding: 1rem 2rem;
 }
 
-/* Hero section */
+/* Hero Section */
 .hero {
-    height: 60vh;
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
-    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c3e50, #4b6cb7);
+    position: relative;
 }
 
-.profile-img {
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+}
+
+.profile-photo {
     width: 150px;
     height: 150px;
+    border-radius: 50%;
+    border: 4px solid #ff6f61;
     object-fit: cover;
-    border: 4px solid #fff;
 }
 
-/* Section başlıkları */
-h2 {
-    font-weight: 700;
-    color: #ffb74d;
+/* Sections */
+.section {
+    padding: 80px 0;
 }
 
-/* Project cards */
+.project-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
 .project-card {
-    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #2c2c2c;
     border-radius: 15px;
+    min-width: 250px;
+    text-align: center;
+    padding: 15px;
+    flex-shrink: 0;
 }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+.project-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-/* Chatbot Icon */
-#chatbot-icon {
+/* Chatbot */
+#chatbot {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #4a148c;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 28px;
+    background-color: #ff6f61;
     cursor: pointer;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 999;
 }
 
-/* Chatbot container */
-#chatbot-container {
+#chat-header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.chat-container {
+    display: none;
     position: fixed;
     bottom: 90px;
     right: 20px;
     width: 350px;
-    height: 500px;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    max-height: 500px;
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
     overflow: hidden;
-    display: none;
     flex-direction: column;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #1f1f1f;
-    z-index: 1000;
+    z-index: 999;
 }
 
-/* Header */
-#chatbot-header {
-    background-color: #4a148c;
-    color: white;
-    padding: 14px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-}
-
-/* Chat body */
-#chatbot-body {
-    display: flex;
-    flex-direction: column;
+#chat-box {
     flex: 1;
-    padding: 10px;
-}
-
-.chat-box {
-    flex: 1;
-    padding: 10px;
     overflow-y: auto;
+    padding: 10px;
 }
 
 .message {
-    margin-bottom: 10px;
-    padding: 12px 16px;
-    border-radius: 25px;
-    max-width: 75%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 15px;
+    max-width: 80%;
     word-wrap: break-word;
 }
 
 .user-message {
-    background-color: #6a11cb;
-    color: #fff;
+    background-color: #4b6cb7;
     align-self: flex-end;
 }
 
 .bot-message {
-    background-color: #333;
-    color: #fff;
+    background-color: #ff6f61;
     align-self: flex-start;
 }
 
-.input-group {
+.chat-input {
     display: flex;
-    border-top: 1px solid #555;
+    padding: 10px;
+    border-top: 1px solid #444;
 }
 
-.input-group input {
+.chat-input input {
     flex: 1;
+    padding: 8px;
+    border-radius: 20px;
     border: none;
-    border-radius: 0 0 0 20px;
-    padding: 12px;
-    background-color: #2c2c2c;
-    color: #fff;
+    outline: none;
+    margin-right: 10px;
 }
 
-.input-group button {
-    border-radius: 0 0 20px 0;
+.chat-input button {
+    background-color: #ff6f61;
     border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-input button i {
+    font-size: 1rem;
 }
