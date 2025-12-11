@@ -3,36 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İsmail Ozan Belkeci - Portfolio</title>
+    <title>Ozan Belkeci — AI Developer & Portfolio</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f2efff, #fdf8ff);
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 120px 0 90px 0;
+            text-align: center;
+            background: linear-gradient(135deg,#6C63FF,#FF6584);
+            color: white;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero img {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            border: 6px solid rgba(255,255,255,0.8);
+            object-fit: cover;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: #4b3fc3;
+        }
+
+        /* Cards - Glass Effect */
+        .glass-card {
+            backdrop-filter: blur(14px);
+            background: rgba(255,255,255,0.55);
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        /* SKILL TAGS */
+        .skill-tag {
+            background: #6C63FF;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin: 4px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .skill-tag:hover {
+            background: #FF6584;
+        }
+
+        /* Chat Button */
+        .chat-toggle-btn {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg,#6C63FF,#FF6584);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+
+        /* Chat Window */
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 22px;
+            width: 360px;
+            height: 480px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 9999;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg,#6C63FF,#FF6584);
+            color: white;
+            padding: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .chat-body {
+            padding: 12px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .msg-bot, .msg-user {
+            padding: 10px 14px;
+            border-radius: 14px;
+            max-width: 85%;
+            margin-bottom: 10px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .msg-bot {
+            background: #eceaff;
+            color: #473fb5;
+        }
+
+        .msg-user {
+            background: #6C63FF;
+            color: white;
+            margin-left: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 6px;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
-<body class="bg-dark text-light">
 
-    <div class="container py-5">
+<body>
 
-        <!-- Başlık -->
-        <div class="text-center mb-4">
-            <h1 class="fw-bold">CV Chatbot</h1>
-            <p class="text-secondary">Bana istediğini sorabilirsin!</p>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <img src="https://avatars.githubusercontent.com/u/106676046?v=4" alt="Profile">
+        <h1 class="mt-4 fw-bold">Ozan Belkeci</h1>
+        <p class="lead">AI & Backend Developer • Python • FastAPI • NLP</p>
+
+        <div class="mt-3">
+            <a href="#" class="btn btn-light btn-sm mx-1"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="btn btn-light btn-sm mx-1"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:test@mail.com" class="btn btn-light btn-sm mx-1"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="container my-5">
+        <h2 class="section-title">Hakkımda</h2>
+
+        <div class="glass-card text-center mx-auto" style="max-width: 850px;">
+            Yapay zeka destekli sistemler geliştiren bir Backend & AI geliştiricisiyim.  
+            Python, FastAPI ve modern makine öğrenimi teknolojileriyle yenilikçi projeler üretmeye odaklanıyorum.
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="container my-5">
+        <h2 class="section-title">Yetenekler</h2>
+
+        <div class="glass-card text-center">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">AI / NLP</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">Docker</span>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="container my-5">
+        <h2 class="section-title">Projeler</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="glass-card">
+                    <h5 class="fw-bold">CV Chatbot</h5>
+                    <p>Yapay zeka ile özgeçmişi analiz eden ve soruları yanıtlayan akıllı asistan.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="glass-card">
+                    <h5 class="fw-bold">AI Raporlama Sistemi</h5>
+                    <p>Çıkarım, özet ve veri analizi yapan NLP tabanlı servis.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="glass-card">
+                    <h5 class="fw-bold">Modern Portfolio</h5>
+                    <p>Minimal, responsive ve cam efektli kişisel site.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="container my-5">
+        <h2 class="section-title">İletişim</h2>
+        <div class="glass-card text-center">
+            Bana ulaşmak için: <b>test@mail.com</b>
+        </div>
+    </section>
+
+    <!-- FLOATING CHAT BUTTON -->
+    <button id="chat-toggle" class="chat-toggle-btn"><i class="fa-solid fa-comments"></i></button>
+
+    <!-- CHAT WINDOW -->
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <span>CV Chatbot</span>
+            <button id="chat-close" class="close-btn">&times;</button>
         </div>
 
-        <!-- Chat Container -->
-        <div id="chat-container" class="card bg-secondary p-3 mb-4">
-            <div id="chat-box"></div>
-        </div>
+        <div id="chat-body" class="chat-body"></div>
 
-        <!-- Message Input -->
-        <div class="input-group">
-            <input id="message" type="text" class="form-control" placeholder="Mesajınızı yazın...">
-            <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
+        <div class="chat-input-area">
+            <input id="chat-input" type="text" class="form-control" placeholder="Bir şey yaz...">
+            <button id="chat-send" class="btn btn-primary">Gönder</button>
         </div>
-
     </div>
 
-    <script src="/static/js/app.js"></script>
+    <!-- JS -->
+    <script>
+        const chatWindow = document.getElementById("chat-window");
+        const chatToggle = document.getElementById("chat-toggle");
+        const chatClose = document.getElementById("chat-close");
+        const chatBody = document.getElementById("chat-body");
+        const chatInput = document.getElementById("chat-input");
+        const chatSend = document.getElementById("chat-send");
+
+        let welcomeSent = false;
+
+        chatToggle.onclick = () => {
+            chatWindow.style.display = "flex";
+            chatToggle.style.display = "none";
+            sendStartMessage();
+        };
+
+        chatClose.onclick = () => {
+            chatWindow.style.display = "none";
+            chatToggle.style.display = "flex";
+        };
+
+        function addMessage(text, sender) {
+            const div = document.createElement("div");
+            div.className = sender === "bot" ? "msg-bot" : "msg-user";
+            div.innerText = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function sendStartMessage() {
+            if (!welcomeSent) {
+                chatRequest("__start__");
+                welcomeSent = true;
+            }
+        }
+
+        chatSend.onclick = () => {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            addMessage(text, "user");
+            chatInput.value = "";
+            chatRequest(text);
+        };
+
+        function chatRequest(message) {
+            fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message })
+            })
+            .then(res => res.json())
+            .then(data => addMessage(data.reply, "bot"))
+            .catch(() => addMessage("Bir hata oluştu.", "bot"));
+        }
+    </script>
+
 </body>
 </html>
