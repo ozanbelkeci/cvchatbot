@@ -125,18 +125,6 @@
 
         <div class="col-md-4">
             <div class="project-card shadow-sm p-4 rounded-4">
-                <h4 class="fw-bold">Vera Mobil</h4>
-                <p>QR Kod ile ürün gösterimi</p>
-                <div class="tags">
-                    <span>.NET Core</span>
-                    <span>MVC</span>
-                    <span>PostgreSQL</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="project-card shadow-sm p-4 rounded-4">
                 <h4 class="fw-bold">Products with QR</h4>
                 <p>QR Kod ile ürün gösterimi</p>
                 <div class="tags">
@@ -213,7 +201,13 @@
         <button id="close-chat"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div id="chat-box" class="chat-box"></div>
+    <div id="chat-box" class="chat-box">
+        <div id="typing-indicator" class="typing-indicator" style="display:none;">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
 
     <div class="chat-input">
         <input id="message" type="text" placeholder="Mesaj yazın..." />

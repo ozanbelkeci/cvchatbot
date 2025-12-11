@@ -9,30 +9,36 @@ function addMessage(text, sender) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-async function sendMessage(forcedText = null) {
-
+async function sendMessage() {
     const input = document.getElementById("message");
-    const msg = forcedText ? forcedText : input.value.trim();
+    const chatBox = document.getElementById("chat-box");
+    const text = input.value.trim();
 
-    if (!msg) return;
+    if (!text) return;
 
-    if (!forcedText) input.value = ""; // sadece kullanıcı yazarsa temizle
+    // Kullanıcı mesajı
+    chatBox.innerHTML += `<div class="user-msg">${text}</div>`;
+    input.value = "";
 
-    // forcedText değilse kullanıcı mesajını ekle
-    if (!forcedText) {
-        addMessage(msg, "user");
-    }
+    // Yazıyor animasyonunu aç
+    document.getElementById("typing-indicator").style.display = "flex";
 
-    const response = await fetch("/api/chat", {
+    // API isteği
+    const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg })
+        body: JSON.stringify({ message: text })
     });
 
-    const data = await response.json();
+    const data = await res.json();
 
-    addMessage(data.reply, "bot");
+    // Yazıyor animasyonunu kapat
+    document.getElementById("typing-indicator").style.display = "none";
+
+    // Bot mesajı
+    chatBox.innerHTML += `<div class="bot-msg">${data.response}</div>`;
 }
+
 
 // Sayfa yüklenince backend'e __start__ gönder -> WELCOME_MESSAGE gelir
 window.addEventListener("load", () => {
