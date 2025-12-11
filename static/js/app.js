@@ -10,31 +10,61 @@ function addMessage(text, sender) {
 }
 
 async function sendMessage(forcedText = null) {
-
     const input = document.getElementById("message");
-    const msg = forcedText ? forcedText : input.value.trim();
+    const typing = document.getElementById("typing-indicator");
 
+    const msg = forcedText ? forcedText : input.value.trim();
     if (!msg) return;
 
-    if (!forcedText) input.value = ""; // sadece kullanıcı yazarsa temizle
-
-    // forcedText değilse kullanıcı mesajını ekle
+    // Kullanıcı kendi mesajını yazdıysa ekle
     if (!forcedText) {
         addMessage(msg, "user");
+        input.value = "";
+        typing.style.display = "flex"; 
     }
 
-    const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg })
-    });
+    try {
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    addMessage(data.reply, "bot");
+        typing.style.display = "none";
+
+        // ❗ API yanlış dönerse undefined yerine düzgün hata göster
+        if (!data || !data.reply) {
+            addMessage("⚠️ Bir hata oluştu. Backend reply döndürmedi.", "bot");
+            console.error("API RESPONSE:", data);
+            return;
+        }
+
+        addMessage(data.reply, "bot");
+
+    } catch (error) {
+        typing.style.display = "none";
+        addMessage("⚠️ Sunucuya ulaşılamıyor.", "bot");
+        console.error("FETCH ERROR:", error);
+    }
 }
+
+
 
 // Sayfa yüklenince backend'e __start__ gönder -> WELCOME_MESSAGE gelir
 window.addEventListener("load", () => {
     sendMessage("__start__");
 });
+
+const chatButton = document.getElementById("chat-button");
+const chatPanel = document.getElementById("chat-panel");
+const closeChat = document.getElementById("close-chat");
+
+chatButton.onclick = () => {
+    chatPanel.style.display = "flex";
+};
+
+closeChat.onclick = () => {
+    chatPanel.style.display = "none";
+};
