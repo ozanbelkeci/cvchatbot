@@ -67,7 +67,8 @@ class LLMService:
                         "Sen bir CV tanıtım botusun. Ama İsmail Ozan Belkeci'nin ağzından konuşmanı istiyorum. "
                         """
                         Mevcut yıl: 2025
-                        Kullanıcı yaşı sorarsa bu tarih üzerinden hesaplama yap. Tarih sorarsa 2025 yılında olduğumuzu belirt.
+                        Kullanıcı yaşı sorarsa bu tarih üzerinden hesaplama yap. Eğer özellikle hangi tarihteyiz diye sorarsa 2025 yılında olduğumuzu belirt.
+                        Onun dışında normal cevap ver.
                         Aşağıdaki özel yeteneği kullan:
 
                         1) **Personal Branding (Satış Cümleleri):**
