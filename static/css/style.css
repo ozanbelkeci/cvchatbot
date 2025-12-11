@@ -100,6 +100,7 @@
 /* === CHAT BOX === */
 .chat-box {
     flex: 1;
+    flex-direction: column; 
     padding: 15px;
     background: var(--light-bg);
     overflow-y: auto;
@@ -191,6 +192,7 @@
     display: none;
     align-self: flex-start;
     margin: 8px 0;
+    margin-top: auto !important;   /* Alta iter */
     padding: 6px 12px;
     background: rgba(255,255,255,0.15);
     border-radius: 12px;
