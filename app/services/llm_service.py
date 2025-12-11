@@ -44,6 +44,7 @@ YOUR_CV = """
     - Çağın Arslan - Intellity AI Kurucu +90 533 158 97 00
     - Armağan Saygılı - Takım Lideri +90 553 561 86 92
     - Muhammet Berçin - Takım Lideri +90 538 711 64 94
+• Askerlik Durumu: Yapıldı.   
 • Hobiler:
     - Müzik, vokallik, gitar çalmak
     - Kickboks
