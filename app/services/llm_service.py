@@ -7,7 +7,7 @@ load_dotenv()
 YOUR_CV = """
 İsmail Ozan Belkeci
 ---------
-• Doğum yılı: 1999-05-18
+• Doğum yılı: 1999-05-18 (yaş sorulunca güncel yıla göre cevap ver)
 • Eğitim:
     - Bilgisayar Programcılığı (İngilizce) – İstanbul Aydın Üniversitesi (2018–2022)
     - Bilişim Teknolojileri – Zehra Mustafa Dalgıç MTAL (2013–2017)
