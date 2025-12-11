@@ -154,3 +154,35 @@
 .chat-input button:hover {
     background: var(--accent);
 }
+
+.icon-btn i {
+    color: #3f3f3f; /* Buraya istediğin rengi yaz */
+    font-size: 22px;
+}
+
+.icon-btn i:hover {
+    color: #3f3f3f; /* hover rengi */
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tags span {
+    background: #eee;
+    padding: 6px 14px;
+    border-radius: 50px; /* Dairesel/oval görünüm */
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    border: 1px solid #ddd;
+    transition: 0.2s ease;
+}
+
+.tags span:hover {
+    background: #d4c5ff; /* Hover rengi */
+    border-color: #b9a8ff;
+    color: #222;
+}
