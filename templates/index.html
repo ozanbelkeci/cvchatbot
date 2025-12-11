@@ -3,125 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ozan CV Chatbot</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: #f4f4f9;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .chat-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            height: 80vh;
-        }
-        .messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 15px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        .user {
-            background: #0d6efd;
-            color: white;
-            align-self: flex-end;
-        }
-        .bot {
-            background: #e9ecef;
-            color: #333;
-            align-self: flex-start;
-        }
-        .input-container {
-            display: flex;
-            border-top: 1px solid #dee2e6;
-        }
-        .input-container input {
-            flex: 1;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            border-radius: 0 0 0 15px;
-        }
-        .input-container button {
-            border: none;
-            background: #0d6efd;
-            color: white;
-            padding: 0 20px;
-            font-size: 16px;
-            border-radius: 0 0 15px 0;
-        }
-    </style>
+    <title>İsmail Ozan Belkeci - Portfolio</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
+<body class="bg-dark text-light">
 
-<div class="chat-container">
-    <div class="messages" id="messages"></div>
-    <div class="input-container">
-        <input type="text" id="userInput" placeholder="Mesajınızı yazın...">
-        <button onclick="sendMessage()">Gönder</button>
+    <div class="container py-5">
+
+        <!-- Başlık -->
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">CV Chatbot</h1>
+            <p class="text-secondary">Bana istediğini sorabilirsin!</p>
+        </div>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="card bg-secondary p-3 mb-4">
+            <div id="chat-box"></div>
+        </div>
+
+        <!-- Message Input -->
+        <div class="input-group">
+            <input id="message" type="text" class="form-control" placeholder="Mesajınızı yazın...">
+            <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
+        </div>
+
     </div>
-</div>
 
-<script>
-const messagesContainer = document.getElementById('messages');
-const userInput = document.getElementById('userInput');
-
-// Mesaj ekleme
-function addMessage(text, sender) {
-    const msg = document.createElement('div');
-    msg.classList.add('message', sender);
-    msg.textContent = text;
-    messagesContainer.appendChild(msg);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-// Mesaj gönderme
-function sendMessage(message=null) {
-    const msg = message || userInput.value.trim();
-    if (!msg) return;
-    addMessage(msg, 'user');
-    userInput.value = '';
-
-    fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data && data.reply) {
-            addMessage(data.reply, 'bot');
-        } else {
-            addMessage("Bot'tan yanıt alınamadı.", 'bot');
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        addMessage("Sunucuya bağlanırken hata oluştu.", 'bot');
-    });
-}
-
-// Başlangıç mesajı
-window.addEventListener("load", () => {
-    sendMessage("__start__");
-});
-
-// Enter ile gönderim
-userInput.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") sendMessage();
-});
-</script>
-
+    <script src="/static/js/app.js"></script>
 </body>
 </html>
