@@ -6,22 +6,22 @@ function addMessage(text, sender) {
     message.innerText = text;
 
     chatBox.appendChild(message);
-
-    // Otomatik aşağı kaydır
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// SEND MESSAGE - hem input'tan hem dışarıdan text alabilir
 async function sendMessage(forcedText = null) {
 
     const input = document.getElementById("message");
-    const msg = forcedText ? forcedText.trim() : input.value.trim();
+    const msg = forcedText ? forcedText : input.value.trim();
 
     if (!msg) return;
 
-    if (!forcedText) input.value = ""; // sadece kullanıcı yazdıysa temizle
+    if (!forcedText) input.value = ""; // sadece kullanıcı yazarsa temizle
 
-    addMessage(msg, "user");
+    // forcedText değilse kullanıcı mesajını ekle
+    if (!forcedText) {
+        addMessage(msg, "user");
+    }
 
     const response = await fetch("/api/chat", {
         method: "POST",
@@ -30,10 +30,11 @@ async function sendMessage(forcedText = null) {
     });
 
     const data = await response.json();
+
     addMessage(data.reply, "bot");
 }
 
-// Sayfa açılır açılmaz otomatik mesaj gönder
+// Sayfa yüklenince backend'e __start__ gönder -> WELCOME_MESSAGE gelir
 window.addEventListener("load", () => {
-    sendMessage("Merhaba! Sana nasıl yardımcı olabilirim? İstediklerini sorabilirsin!");
+    sendMessage("__start__");
 });
