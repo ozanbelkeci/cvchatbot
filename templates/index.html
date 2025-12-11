@@ -10,9 +10,9 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4a148c;">
     <div class="container">
-        <a class="navbar-brand" href="#">Ozan</a>
+        <a class="navbar-brand fw-bold" href="#">Ozan</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,47 +27,48 @@
 </nav>
 
 <!-- Hero Section -->
-<section class="hero text-center text-white d-flex align-items-center justify-content-center">
+<section class="hero d-flex align-items-center justify-content-center text-center text-white">
     <div class="container">
-        <h1 class="display-4">Merhaba! Ben Ozan</h1>
+        <img src="/static/img/profile.jpg" alt="Profil Fotoğrafı" class="rounded-circle profile-img mb-3">
+        <h1 class="display-4 fw-bold">Merhaba! Ben Ozan</h1>
         <p class="lead">CV bilgilerime ulaşmak için sağ alt köşedeki chatbot'u kullanabilirsiniz.</p>
     </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-5">
+<section id="about" class="py-5 bg-light">
     <div class="container">
-        <h2>Hakkımda</h2>
-        <p>Ben Ozan, yazılım geliştirme ve yapay zeka ile ilgileniyorum...</p>
+        <h2 class="mb-4">Hakkımda</h2>
+        <p>Ben Ozan, yazılım geliştirme ve yapay zeka ile ilgileniyorum. Çeşitli projeler geliştiriyor ve bilgilerimi paylaşmayı seviyorum. İstersen sağ alt köşedeki chatbot'tan CV bilgilerime ulaşabilirsin.</p>
     </div>
 </section>
 
 <!-- Projects Section -->
-<section id="projects" class="py-5 bg-light">
+<section id="projects" class="py-5">
     <div class="container">
-        <h2>Projeler</h2>
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="card">
+        <h2 class="mb-4">Projeler</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card project-card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Proje 1</h5>
-                        <p class="card-text">Proje açıklaması...</p>
+                        <p class="card-text">Özgün proje açıklaması buraya gelecek.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
+            <div class="col-md-4">
+                <div class="card project-card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Proje 2</h5>
-                        <p class="card-text">Proje açıklaması...</p>
+                        <p class="card-text">Özgün proje açıklaması buraya gelecek.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
+            <div class="col-md-4">
+                <div class="card project-card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Proje 3</h5>
-                        <p class="card-text">Proje açıklaması...</p>
+                        <p class="card-text">Özgün proje açıklaması buraya gelecek.</p>
                     </div>
                 </div>
             </div>
@@ -76,24 +77,43 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-5">
+<section id="contact" class="py-5 bg-light">
     <div class="container">
-        <h2>İletişim</h2>
+        <h2 class="mb-4">İletişim</h2>
         <p>Email: ozan@example.com</p>
         <p>LinkedIn: <a href="#">linkedin.com/in/ozan</a></p>
     </div>
 </section>
 
-<!-- Chatbot -->
-<div id="chatbot">
-    <div id="chat-box" class="chat-box"></div>
-    <div class="input-group">
-        <input type="text" id="message" class="form-control" placeholder="Mesajınızı yazın...">
-        <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
+<!-- Chatbot (Açılır/Kapanır) -->
+<div id="chatbot-container">
+    <div id="chatbot-header" onclick="toggleChat()">
+        <span>CV Chatbot</span>
+        <span id="chatbot-toggle">&#9650;</span>
+    </div>
+    <div id="chatbot-body">
+        <div id="chat-box" class="chat-box"></div>
+        <div class="input-group">
+            <input type="text" id="message" class="form-control" placeholder="Mesajınızı yazın...">
+            <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
+        </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/static/js/app.js"></script>
+<script>
+function toggleChat() {
+    const body = document.getElementById("chatbot-body");
+    const toggle = document.getElementById("chatbot-toggle");
+    if (body.style.display === "none" || !body.style.display) {
+        body.style.display = "flex";
+        toggle.innerHTML = "&#9650;";
+    } else {
+        body.style.display = "none";
+        toggle.innerHTML = "&#9660;";
+    }
+}
+</script>
 </body>
 </html>
