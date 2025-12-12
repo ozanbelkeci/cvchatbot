@@ -202,7 +202,7 @@
     margin: 8px 0;
     margin-top: auto !important;
     padding: 8px 14px;
-    background: #1E40AF;
+    background: #334155;
     border-radius: 20px;
     gap: 8px;
     display: flex;
@@ -211,7 +211,7 @@
 .typing-indicator span {
     width: 10px;
     height: 10px;
-    background: #707070;
+    background: white;
     border-radius: 50%;
     display: inline-block;
     animation: jump 0.8s infinite ease-in-out;
