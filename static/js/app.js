@@ -1,5 +1,5 @@
 function addMessage(text, sender) {
-    const chatBox = document.getElementById("chat-box");
+    const chatBox = document.getElementById("newMessage");
 
     const message = document.createElement("div");
     message.className = sender === "user" ? "message user-message" : "message bot-message";
