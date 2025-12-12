@@ -73,7 +73,7 @@
     height: 460px;
     background: white;
     border-radius: 15px;
-    display: flex;
+    display: none;
     flex-direction: column;
     overflow: hidden;
     border: 3px solid var(--secondary);

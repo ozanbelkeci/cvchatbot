@@ -65,7 +65,13 @@ async function sendMessage(forcedText = null, retryCount = 0) {
 }
 
 // Sayfa yüklenince __start__ mesajı
-window.addEventListener("load", () => sendMessage("__start__"));
+// Sayfa yüklenince paneli aç
+window.addEventListener("load", () => {
+    const chatPanel = document.getElementById("chat-panel");
+    chatPanel.style.display = "flex";
+    sendMessage("__start__");
+});
+
 
 // === CHAT PANEL TOGGLE ===
 const chatButton = document.getElementById("chat-button");
