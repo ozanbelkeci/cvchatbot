@@ -12,7 +12,7 @@ function addMessage(text, sender) {
     panel.scrollTop = panel.scrollHeight;
 }
 
-async function sendMessage(forcedText = null) {
+async function sendMessage(forcedText = null, retryCount = 0) {
     const input = document.getElementById("message");
     const typing = document.getElementById("typing-indicator");
 
@@ -47,8 +47,16 @@ async function sendMessage(forcedText = null) {
 
     } catch (error) {
         typing.style.display = "none";
-        addMessage("⚠️ Sunucuya ulaşılamıyor.", "bot");
-        console.error("FETCH ERROR:", error);
+
+        // RATE LIMIT HATASI GELİRSE 429
+        if (error.response && error.response.status === 429 && retryCount < 5) {
+            console.warn("Rate limit aşıldı, 20 saniye bekleniyor...");
+            await new Promise(r => setTimeout(r, 20000)); // 20 saniye bekle
+            return sendMessage(msg, retryCount + 1);     // tekrar dene
+        } else {
+            addMessage("⚠️ Sunucuya ulaşılamıyor.", "bot");
+            console.error("FETCH ERROR:", error);
+        }
     }
 }
 
