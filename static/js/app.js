@@ -1,22 +1,13 @@
 function addMessage(text, sender) {
     const chatBox = document.getElementById("chat-box");
-    const typing = document.getElementById("typing-indicator");
 
-    // Yeni mesaj oluştur
     const message = document.createElement("div");
     message.className = sender === "user" ? "message user-message" : "message bot-message";
     message.innerText = text;
 
-    // Mesajı ekle
     chatBox.appendChild(message);
-
-    // Typing indicator'ı en alta almak için sona tekrar ekle
-    chatBox.appendChild(typing);
-
-    // Her şeyden sonra scroll'u aşağıya çek
     chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 async function sendMessage(forcedText = null) {
     const input = document.getElementById("message");
