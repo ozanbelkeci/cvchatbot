@@ -19,7 +19,6 @@ async function sendMessage(forcedText = null, retryCount = 0) {
     const msg = forcedText ? forcedText : input.value.trim();
     if (!msg) return;
 
-    // Kullanıcı mesajı
     if (!forcedText) {
         addMessage(msg, "user");
         input.value = "";
@@ -48,11 +47,10 @@ async function sendMessage(forcedText = null, retryCount = 0) {
     } catch (error) {
         typing.style.display = "none";
 
-        // RATE LIMIT HATASI GELİRSE 429
         if (error.response && error.response.status === 429 && retryCount < 5) {
             console.warn("Rate limit aşıldı, 20 saniye bekleniyor...");
-            await new Promise(r => setTimeout(r, 20000)); // 20 saniye bekle
-            return sendMessage(msg, retryCount + 1);     // tekrar dene
+            await new Promise(r => setTimeout(r, 20000));
+            return sendMessage(msg, retryCount + 1);
         } else {
             addMessage("⚠️ Sunucuya ulaşılamıyor.", "bot");
             console.error("FETCH ERROR:", error);
@@ -60,37 +58,28 @@ async function sendMessage(forcedText = null, retryCount = 0) {
     }
 }
 
+// Sayfa yüklenince __start__ mesajı
+window.addEventListener("load", () => sendMessage("__start__"));
 
-// Sayfa açılınca __start__ gönder
-window.addEventListener("load", () => {
-    sendMessage("__start__");
-});
-
-
-// === CHAT PANEL TOGGLE (Aç/Kapa aynı butonda) ===
+// === CHAT PANEL TOGGLE ===
 const chatButton = document.getElementById("chat-button");
 const chatPanel = document.getElementById("chat-panel");
 const closeChat = document.getElementById("close-chat");
 
 chatButton.onclick = () => {
-    chatPanel.style.display = 
-        chatPanel.style.display === "flex" ? "none" : "flex";
+    chatPanel.style.display = chatPanel.style.display === "flex" ? "none" : "flex";
 };
 
 closeChat.onclick = () => {
     chatPanel.style.display = "none";
 };
 
-
-// === ENTER İLE MESAJ GÖNDERME ===
-// Shift + Enter = yeni satır, sadece Enter = gönder
+// === ENTER İLE GÖNDER ===
 const messageInput = document.getElementById("message");
 
 messageInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        if (!event.shiftKey) {
-            event.preventDefault();
-            sendMessage();
-        }
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
     }
 });
