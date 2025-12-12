@@ -47,6 +47,12 @@ async function sendMessage(forcedText = null, retryCount = 0) {
     } catch (error) {
         typing.style.display = "none";
 
+        if (error.message && error.message.includes("Rate limit")) {
+            addMessage("⚠️ GPT API token limitine ulaşıldı. Lütfen biraz bekledikten sonra mesajınızı tekrar gönderin.", "bot");
+            console.error("Rate Limit Hatası:", error);
+            return;
+        }
+
         if (error.response && error.response.status === 429 && retryCount < 5) {
             console.warn("Rate limit aşıldı, 20 saniye bekleniyor...");
             await new Promise(r => setTimeout(r, 20000));
