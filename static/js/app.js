@@ -6,7 +6,10 @@ function addMessage(text, sender) {
     message.innerText = text;
 
     chatBox.appendChild(message);
-    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Scroll en alta
+    const panel = document.getElementById("chat-box");
+    panel.scrollTop = panel.scrollHeight;
 }
 
 async function sendMessage(forcedText = null) {
@@ -16,11 +19,11 @@ async function sendMessage(forcedText = null) {
     const msg = forcedText ? forcedText : input.value.trim();
     if (!msg) return;
 
-    // Kullanıcı kendi mesajını yazdıysa ekle
+    // Kullanıcı mesajı
     if (!forcedText) {
         addMessage(msg, "user");
         input.value = "";
-        typing.style.display = "flex"; 
+        typing.style.display = "flex";
     }
 
     try {
@@ -34,7 +37,6 @@ async function sendMessage(forcedText = null) {
 
         typing.style.display = "none";
 
-        // ❗ API yanlış dönerse undefined yerine düzgün hata göster
         if (!data || !data.reply) {
             addMessage("⚠️ Bir hata oluştu. Backend reply döndürmedi.", "bot");
             console.error("API RESPONSE:", data);
@@ -51,20 +53,36 @@ async function sendMessage(forcedText = null) {
 }
 
 
-
-// Sayfa yüklenince backend'e __start__ gönder -> WELCOME_MESSAGE gelir
+// Sayfa açılınca __start__ gönder
 window.addEventListener("load", () => {
     sendMessage("__start__");
 });
 
+
+// === CHAT PANEL TOGGLE (Aç/Kapa aynı butonda) ===
 const chatButton = document.getElementById("chat-button");
 const chatPanel = document.getElementById("chat-panel");
 const closeChat = document.getElementById("close-chat");
 
 chatButton.onclick = () => {
-    chatPanel.style.display = "flex";
+    chatPanel.style.display = 
+        chatPanel.style.display === "flex" ? "none" : "flex";
 };
 
 closeChat.onclick = () => {
     chatPanel.style.display = "none";
 };
+
+
+// === ENTER İLE MESAJ GÖNDERME ===
+// Shift + Enter = yeni satır, sadece Enter = gönder
+const messageInput = document.getElementById("message");
+
+messageInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        if (!event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+    }
+});
